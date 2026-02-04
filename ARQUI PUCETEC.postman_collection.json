@@ -1,0 +1,237 @@
+{
+  "info": {
+    "_postman_id": "25164ac8-a87a-4c31-814a-7b93afb1446b",
+    "name": "ARQUI PUCETEC",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47547377",
+    "_collection_link": "https://go.postman.co/collection/47547377-25164ac8-a87a-4c31-814a-7b93afb1446b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "https://us-east-28kj2auuqq.auth.us-east-2.amazoncognito.com/oauth2/token",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "authorization_code",
+              "type": "text",
+              "uuid": "8a37dca2-57d8-42da-868a-9edb0dd4bbb5"
+            },
+            {
+              "key": "client_id",
+              "value": "fct3jt06dbuhbm96dp6vhu060",
+              "type": "text",
+              "uuid": "d47b65e4-fbfa-4eb5-a634-587dae098b95"
+            },
+            {
+              "key": "client_secret",
+              "value": "t46uq5r9ua0evjf9g75to5k6i8312d6luc3j6esdfu6jq22uthb",
+              "type": "text",
+              "uuid": "2ebaa054-4035-4c72-a27e-231af8e65f22"
+            },
+            {
+              "key": "code",
+              "value": "c3b7d327-6e2d-434d-bd96-05ef68dfec2a",
+              "type": "text",
+              "uuid": "f59aab66-24d6-4af3-ba61-303e6cdd0714"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://d84l1y8p4kdic.cloudfront.net",
+              "type": "text",
+              "uuid": "e851b27a-1763-4394-b711-9d3b19ee2759"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://us-east-28kj2auuqq.auth.us-east-2.amazoncognito.com/oauth2/token",
+          "protocol": "https",
+          "host": [
+            "us-east-28kj2auuqq",
+            "auth",
+            "us-east-2",
+            "amazoncognito",
+            "com"
+          ],
+          "path": [
+            "oauth2",
+            "token"
+          ]
+        },
+        "description": "Obtener token desde cognito aws"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/api/restricted",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJraWQiOiJMTFVHS2g5TUFMWlhaRGNDVjJFVWd4ZzcwQ1E1aE9wQ01SWDVxVUs2S3hVPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJiMThiOTViMC0xMGQxLTcwMzUtZmFkMS02Mjg1YWE4ZjYzYzQiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl84S2oyYXV1cVEiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiJmY3QzanQwNmRidWhibTk2ZHA2dmh1MDYwIiwib3JpZ2luX2p0aSI6ImY1ZDIwMzlkLTg3ZjktNGE4Zi1hNzcxLTIwNjAzN2VlMGRmZSIsImV2ZW50X2lkIjoiNmYwYzY5NWQtOGI0YS00MzA0LWI5ZWYtYjBmNTk3MjQ3NmIyIiwidG9rZW5fdXNlIjoiYWNjZXNzIiwic2NvcGUiOiJwaG9uZSBvcGVuaWQgZW1haWwiLCJhdXRoX3RpbWUiOjE3NjkwNDg0MzgsImV4cCI6MTc2OTA1MjAzOCwiaWF0IjoxNzY5MDQ4NDM4LCJqdGkiOiI3NTgwOWVhMi0xZTBkLTRiM2QtOTAzYy1lN2UwYzgyNTFkY2YiLCJ1c2VybmFtZSI6ImIxOGI5NWIwLTEwZDEtNzAzNS1mYWQxLTYyODVhYThmNjNjNCJ9.lG3l894SxGYhhMbc6Qsj3DcpdMQ3pTDOv65xqvGig6DaCqdm5oBa9FkxMguhhpZLIcCsrDdF4OVa5Yu2m_Lw9pQmaZD0G_D0JXHMmBStwJ2hVmDN29e1mwgYIcrFnk8ZSNvBQwpX_ykoQKq16WEs6YKqEzhMPGO2HTsqkC87fxLkMx0AxlbQKLdyfctdW5n8YpkmqpiBKW6-zM8qQ4hSD9eacA2--mHrijF21xKcOkCCwzLAtkbHfdf9jMp2vLYlTK_bty5-yixWiO2qWe6kMMg89F7iF6esMncmHoQnTmBYi7pNnrctNNTgGXHIFooH3N4RwsRQWfOb7n-pTVzZuw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJraWQiOiJMTFVHS2g5TUFMWlhaRGNDVjJFVWd4ZzcwQ1E1aE9wQ01SWDVxVUs2S3hVPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJiMThiOTViMC0xMGQxLTcwMzUtZmFkMS02Mjg1YWE4ZjYzYzQiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl84S2oyYXV1cVEiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiJmY3QzanQwNmRidWhibTk2ZHA2dmh1MDYwIiwib3JpZ2luX2p0aSI6ImQwMjYzOWJkLTBkZmQtNDkwMC04YmQ4LTA5ZDYyYWUwZTUyOSIsImV2ZW50X2lkIjoiY2IyZTNiZTMtZDI5Ny00YWI1LTg2YjYtMjhjZjFhYzhmYjdjIiwidG9rZW5fdXNlIjoiYWNjZXNzIiwic2NvcGUiOiJwaG9uZSBvcGVuaWQgZW1haWwiLCJhdXRoX3RpbWUiOjE3NjkwMzYxNTEsImV4cCI6MTc2OTAzOTc1MSwiaWF0IjoxNzY5MDM2MTUxLCJqdGkiOiJiYWFlMTc4Ni0yYWYwLTRjYzQtYjM1My02MTQ4NDI3YWZkNmQiLCJ1c2VybmFtZSI6ImIxOGI5NWIwLTEwZDEtNzAzNS1mYWQxLTYyODVhYThmNjNjNCJ9.Z01YNcPO-dlX2eqVkezRCUsRdKAQxVrh9-C8Y9kuVH2anql7oRfIPreqqLRzQAuGqX0EFNHAxGD1rVVA5w7J2f5PaRKD1e9unbGszdwZOxHLhyI1zgL0j0_P5CtEU3TO0mcushzNiYjhuazVBthZZ39aqtQgzf848HPglkbkabk5nYIeQFG5VlNJ4m0DO3Fualwe7eydkLVVruWOT7n52ulM0jYuyIcELdpE3A4aCH2y5EXkfJY5HcQjoB6lUaEGs8u7u-ahkMBFyJoefBV7mmyKAgo3Y9Ry_JsWj_S41FtUgff3vB9QpJ-P64h9f7uMbLX4xTBcMQiAantNFfcgBQ\n",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/admin",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin"
+          ]
+        },
+        "description": "Cambiar el access token"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/api/restricted",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "oauth2",
+          "oauth2": [
+            {
+              "key": "grant_type",
+              "value": "authorization_code",
+              "type": "string"
+            },
+            {
+              "key": "accessTokenUrl",
+              "value": "https://us-east-28kj2auuqq.auth.us-east-2.amazoncognito.com/oauth2/token",
+              "type": "string"
+            },
+            {
+              "key": "authUrl",
+              "value": "https://us-east-28kj2auuqq.auth.us-east-2.amazoncognito.com/login",
+              "type": "string"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://d84l1y8p4kdic.cloudfront.net",
+              "type": "string"
+            },
+            {
+              "key": "addTokenTo",
+              "value": "header",
+              "type": "string"
+            },
+            {
+              "key": "useBrowser",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "key": "clientSecret",
+              "value": "t46uq5r9ua0evjf9g75to5k6i8312d6luc3j6esdfu6jq22uthb",
+              "type": "string"
+            },
+            {
+              "key": "clientId",
+              "value": "fct3jt06dbuhbm96dp6vhu060",
+              "type": "string"
+            },
+            {
+              "key": "tokenName",
+              "value": "arq_puce_token",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJraWQiOiJMTFVHS2g5TUFMWlhaRGNDVjJFVWd4ZzcwQ1E1aE9wQ01SWDVxVUs2S3hVPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJiMThiOTViMC0xMGQxLTcwMzUtZmFkMS02Mjg1YWE4ZjYzYzQiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl84S2oyYXV1cVEiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiJmY3QzanQwNmRidWhibTk2ZHA2dmh1MDYwIiwib3JpZ2luX2p0aSI6ImQwMjYzOWJkLTBkZmQtNDkwMC04YmQ4LTA5ZDYyYWUwZTUyOSIsImV2ZW50X2lkIjoiY2IyZTNiZTMtZDI5Ny00YWI1LTg2YjYtMjhjZjFhYzhmYjdjIiwidG9rZW5fdXNlIjoiYWNjZXNzIiwic2NvcGUiOiJwaG9uZSBvcGVuaWQgZW1haWwiLCJhdXRoX3RpbWUiOjE3NjkwMzYxNTEsImV4cCI6MTc2OTAzOTc1MSwiaWF0IjoxNzY5MDM2MTUxLCJqdGkiOiJiYWFlMTc4Ni0yYWYwLTRjYzQtYjM1My02MTQ4NDI3YWZkNmQiLCJ1c2VybmFtZSI6ImIxOGI5NWIwLTEwZDEtNzAzNS1mYWQxLTYyODVhYThmNjNjNCJ9.Z01YNcPO-dlX2eqVkezRCUsRdKAQxVrh9-C8Y9kuVH2anql7oRfIPreqqLRzQAuGqX0EFNHAxGD1rVVA5w7J2f5PaRKD1e9unbGszdwZOxHLhyI1zgL0j0_P5CtEU3TO0mcushzNiYjhuazVBthZZ39aqtQgzf848HPglkbkabk5nYIeQFG5VlNJ4m0DO3Fualwe7eydkLVVruWOT7n52ulM0jYuyIcELdpE3A4aCH2y5EXkfJY5HcQjoB6lUaEGs8u7u-ahkMBFyJoefBV7mmyKAgo3Y9Ry_JsWj_S41FtUgff3vB9QpJ-P64h9f7uMbLX4xTBcMQiAantNFfcgBQ\n",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"rule 1\", \r\n    \"description\": \"This is rule 1\",\r\n    \"isActive\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/rules",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "rules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/api/rules",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/rules",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "rules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/public/health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/public/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "public",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
