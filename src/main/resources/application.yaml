@@ -1,3 +1,9 @@
+# AWS Cognito Configuration
+aws:
+  cognito:
+    region: us-east-2
+    user-pool-id: us-east-2_8Kj2auuqQ
+
 spring:
   application:
     name: inventory-config-service
@@ -23,8 +29,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${COGNITO_ISSUER_URI:https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX}
-          jwk-set-uri: ${COGNITO_JWK_SET_URI:https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX/.well-known/jwks.json}
+          issuer-uri: https://cognito-idp.${aws.cognito.region}.amazonaws.com/${aws.cognito.user-pool-id}
+          jwk-set-uri: https://cognito-idp.${aws.cognito.region}.amazonaws.com/${aws.cognito.user-pool-id}/.well-known/jwks.json
 
 # Application custom properties
 app:
@@ -33,8 +39,8 @@ app:
     user-id-claim: ${USER_ID_CLAIM:sub}
     # Claim name used to extract roles/groups (Cognito groups claim)
     roles-claim: ${ROLES_CLAIM:cognito:groups}
-    # Admin role name
-    admin-role: ${ADMIN_ROLE:ADMIN}
+    # Admin role name (must match Cognito group name exactly)
+    admin-role: ${ADMIN_ROLE:admin}
 
 # Server configuration
 server:
