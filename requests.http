@@ -1,0 +1,235 @@
+### Inventory Config Service - API Requests
+### Expected: 400 Bad Request - "A rule with name 'Low Stock Alert' already exists"
+
+}
+    "description": "This name already exists"
+    "name": "Low Stock Alert",
+{
+
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+POST {{baseUrl}}/api/rules
+### ERROR: Create duplicate rule name
+
+###
+
+### Expected: 403 Forbidden
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+DELETE {{baseUrl}}/api/rules/1
+### ERROR: Non-admin trying to delete (forbidden)
+
+###
+
+### Expected: 403 Forbidden
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+PATCH {{baseUrl}}/api/rules/1/toggle
+### ERROR: Non-admin trying to toggle (forbidden)
+
+###
+
+### Expected: 403 Forbidden
+
+}
+    "description": "User without ADMIN role cannot update rules"
+    "name": "This should fail",
+{
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+PUT {{baseUrl}}/api/rules/1
+### ERROR: Non-admin trying to update (forbidden)
+
+###
+
+### Expected: 403 Forbidden - "Access denied. Insufficient permissions."
+
+}
+    "description": "User without ADMIN role cannot create rules"
+    "name": "This should fail",
+{
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+POST {{baseUrl}}/api/rules
+### ERROR: Non-admin trying to create (forbidden)
+
+###
+
+### Expected: 404 Not Found - "Inventory rule with id 9999 not found"
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+GET {{baseUrl}}/api/rules/9999
+### ERROR: Get non-existent rule
+
+###
+
+### Expected: 400 Bad Request - "name: Name is required"
+
+}
+    "description": "This should fail validation"
+    "name": "",
+{
+
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+POST {{baseUrl}}/api/rules
+### ERROR: Create rule with invalid data (validation error)
+
+### ========================================
+### ERROR SCENARIOS
+### ========================================
+
+
+### Expected: 204 No Content
+
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+DELETE {{baseUrl}}/api/rules/3
+### Delete a rule (ADMIN only)
+
+###
+
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+PATCH {{baseUrl}}/api/rules/1/toggle
+### Toggle rule active status (ADMIN only)
+
+###
+
+}
+    "isActive": true
+    "description": "Trigger alert when stock falls below 10 units",
+    "name": "Low Stock Alert - Updated",
+{
+
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+PUT {{baseUrl}}/api/rules/1
+### Update an existing rule (ADMIN only)
+
+###
+
+}
+    "isActive": false
+    "description": "Check for products nearing expiration date",
+    "name": "Expiration Check",
+{
+
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+POST {{baseUrl}}/api/rules
+### Create a third rule
+
+###
+
+}
+    "isActive": true
+    "description": "Automatically reorder when quantity drops below minimum",
+    "name": "Auto Reorder Rule",
+{
+
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+POST {{baseUrl}}/api/rules
+### Create another rule for testing
+
+###
+
+# }
+#   "updatedAt": "2024-01-15T10:30:00"
+#   "createdAt": "2024-01-15T10:30:00",
+#   "updatedBy": "abc123-user-sub-from-cognito",
+#   "isActive": true,
+#   "description": "Trigger alert when stock falls below threshold",
+#   "name": "Low Stock Alert",
+#   "id": 1,
+# {
+### Expected Response (201 Created):
+
+}
+    "isActive": true
+    "description": "Trigger alert when stock falls below threshold",
+    "name": "Low Stock Alert",
+{
+
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+POST {{baseUrl}}/api/rules
+### Create a new inventory rule (ADMIN only)
+
+### ========================================
+### ADMIN-ONLY ENDPOINTS (ADMIN role required)
+### ========================================
+
+
+### Expected: 401 Unauthorized
+
+Content-Type: application/json
+GET {{baseUrl}}/api/rules
+### ERROR: Accessing authenticated endpoint without token
+
+###
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+GET {{baseUrl}}/api/rules/search?name=stock
+### Search rules by name (authenticated)
+
+###
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+GET {{baseUrl}}/api/rules/active
+### Get only active rules (authenticated)
+
+###
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+GET {{baseUrl}}/api/rules/1
+### Get rule by ID (authenticated)
+
+###
+
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+GET {{baseUrl}}/api/rules
+### Get all inventory rules (authenticated)
+
+### ========================================
+### AUTHENTICATED ENDPOINTS (Any valid JWT)
+### ========================================
+
+
+# }
+#   "timestamp": "2024-01-15T10:30:00"
+#   "service": "inventory-config-service",
+#   "status": "OK",
+# {
+### Expected Response:
+
+Content-Type: application/json
+GET {{baseUrl}}/public/health
+### Health Check - Public endpoint
+
+### ========================================
+### PUBLIC ENDPOINTS (No authentication)
+### ========================================
+
+
+@adminToken = eyJraWQiOiJYXXX...YOUR_ADMIN_JWT_TOKEN
+# Replace with a valid JWT token from AWS Cognito (user with ADMIN group)
+
+@userToken = eyJraWQiOiJYXXX...YOUR_USER_JWT_TOKEN
+# Replace with a valid JWT token from AWS Cognito (any authenticated user)
+
+@baseUrl = http://localhost:8080
+### ===== VARIABLES =====
+
+### This file contains example requests for testing all endpoints
+
