@@ -1,6 +1,7 @@
 package com.puce.inventory.config
 
 import com.puce.inventory.security.CognitoJwtAuthenticationConverter
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
+import jakarta.annotation.PostConstruct
 
 @Configuration
 @EnableWebSecurity
@@ -21,8 +23,18 @@ class SecurityConfig(
     private val adminRole: String
 ) {
 
+    private val logger = LoggerFactory.getLogger(SecurityConfig::class.java)
+
+    @PostConstruct
+    fun init() {
+        logger.info("SecurityConfig initialized with adminRole: '$adminRole'")
+        logger.info("Security will check for ROLE_$adminRole")
+    }
+
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
+        logger.info("Configuring security filter chain with adminRole: $adminRole")
+
         http
             // Disable CSRF for REST API
             .csrf { it.disable() }
@@ -40,11 +52,13 @@ class SecurityConfig(
                     .requestMatchers("/actuator/health").permitAll()
                     .requestMatchers("/error").permitAll()
 
-                    // Admin-only endpoints - require ADMIN role
-                    .requestMatchers(HttpMethod.POST, "/api/rules/**").hasRole(adminRole)
-                    .requestMatchers(HttpMethod.PUT, "/api/rules/**").hasRole(adminRole)
-                    .requestMatchers(HttpMethod.PATCH, "/api/rules/**").hasRole(adminRole)
-                    .requestMatchers(HttpMethod.DELETE, "/api/rules/**").hasRole(adminRole)
+                    // Admin-only endpoints - require admin role
+                    // Using hasAuthority with explicit ROLE_ prefix for clarity
+                    .requestMatchers(HttpMethod.POST, "/api/rules").hasAuthority("ROLE_$adminRole")
+                    .requestMatchers(HttpMethod.POST, "/api/rules/**").hasAuthority("ROLE_$adminRole")
+                    .requestMatchers(HttpMethod.PUT, "/api/rules/**").hasAuthority("ROLE_$adminRole")
+                    .requestMatchers(HttpMethod.PATCH, "/api/rules/**").hasAuthority("ROLE_$adminRole")
+                    .requestMatchers(HttpMethod.DELETE, "/api/rules/**").hasAuthority("ROLE_$adminRole")
 
                     // Authenticated endpoints - require valid JWT (any role)
                     .requestMatchers(HttpMethod.GET, "/api/**").authenticated()
